@@ -11,8 +11,15 @@ def test_composer(Command):
     assert Command('composer --version').stdout.startswith('Composer version')
 
 
-def test_pear(Command):
+def test_pear(Command, Sudo):
     assert Command('pear version').stdout.startswith('PEAR Version')
+    with Sudo():
+        assert Command(
+            'php /root/check_pear.php').stdout.strip() == 'bool(true)'
+
+
+def test_pecl(Command):
+    assert Command('pecl version').stdout.startswith('PEAR Version')
 
 
 def test_php_ini(Command):

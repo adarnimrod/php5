@@ -20,3 +20,8 @@
 - hosts: all
   roles:
     - role: php5
+  post_tasks:
+      - name: Copy check_pear script
+        copy:
+            src: check_pear.php
+            dest: /root/check_pear.php
